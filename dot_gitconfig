@@ -1,0 +1,16 @@
+[user]
+    name = Fabio Alessandro Locati
+    email = me@fale.io
+    signingkey = 6C87B5F613A3F7F8
+
+[push]
+    default = simple
+
+[commit]
+    gpgsign = true
+
+[pull]
+    rebase = true
+
+[url "git@github.com:"]
+    insteadOf = https://github.com/

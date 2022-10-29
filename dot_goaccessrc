@@ -1,0 +1,26 @@
+time-format CLOUDFRONT
+date-format CLOUDFRONT
+log-format CLOUDFRONT
+max-items 3660
+no-global-config true
+agent-list true
+no-query-string true
+
+ignore-crawlers true
+
+ignore-status 301
+ignore-status 302
+
+static-file .css
+static-file .js
+static-file .jpg
+static-file .png
+static-file .ico
+static-file .pdf
+static-file .webp
+static-file .woff
+static-file .woff2
+static-file .txt
+static-file .zip
+
+unknowns-log /home/fale/fale-io-logs/browser.unknowon

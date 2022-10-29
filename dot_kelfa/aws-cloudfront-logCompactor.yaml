@@ -1,0 +1,4 @@
+region: eu-central-1
+bucket: fale-io-logs
+archive_folder: archived
+compacted_folder: compacted

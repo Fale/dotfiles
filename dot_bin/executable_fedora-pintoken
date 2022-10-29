@@ -1,0 +1,3 @@
+#!/bin/bash
+gopass show --password www/fedoraproject.org | tr -d '\n'
+gopass otp www/fedoraproject.org | awk -F' ' '{print $1}'

@@ -1,0 +1,15 @@
+data.location=~/.task
+
+taskd.server=s0.ie.fale.io:53589
+taskd.credentials=Locati\/Fale\/0a6ad95b-6dc2-4b26-a2b1-bc483ae985db
+taskd.certificate=\/var\/home\/fale\/.task-fale.cert.pem
+taskd.key=\/var\/home\/fale\/.task-fale.key.pem
+taskd.ca=\/var\/home\/fale\/.task-ca.cert.pem
+
+report.next.filter=status:pending limit:page -backlog -goal
+
+report.todo.columns=id,start.active,entry.age,depends.indicator,priority,project,tags,recur.indicator,wait,wait.remaining,scheduled,due,until,description
+report.todo.description=Future (hidden) tasks
+report.todo.filter=(status:pending or status:waiting) -backlog -goal
+report.todo.labels=ID,A,Age,D,P,Project,Tags,R,Wait,Remaining,Sched,Due,Until,Description
+report.todo.sort=due+,wait+,entry+

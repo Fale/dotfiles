@@ -1,0 +1,15 @@
+#!/bin/bash
+if [[ ${1} == "" ]]; then
+    branch="master"
+else
+    branch=${1}
+fi  
+if [[ ${2} == "" ]]; then
+    remote="origin"
+else
+    remote=${2}
+fi  
+dt=$(TZ='Europe/Rome' date +%Y%m%d%H%M%S)
+git tag ${dt}
+git push ${remote} ${dt}
+git push ${remote} ${branch}

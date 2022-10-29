@@ -1,0 +1,20 @@
+#!/bin/bash
+if [[ ${1} == "" ]]; then
+    context=${PWD##*/}
+else
+    context=${1}
+fi
+if [[ ${2} == "" ]]; then
+    branch="master"
+else
+    branch=${2}
+fi  
+if [[ ${3} == "" ]]; then
+    remote="origin"
+else
+    remote=${3}
+fi  
+dt=$(TZ='UTC' date +%Y%m%d%H%M%S)
+git tag ${context}-${dt}
+git push ${remote} ${context}-${dt}
+git push ${remote} ${branch}
