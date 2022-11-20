@@ -6,10 +6,28 @@ taskd.certificate=\/var\/home\/fale\/.task-fale.cert.pem
 taskd.key=\/var\/home\/fale\/.task-fale.key.pem
 taskd.ca=\/var\/home\/fale\/.task-ca.cert.pem
 
-report.next.filter=status:pending limit:page -backlog -goal
+report.next.filter=status:pending limit:page -backlog -content -goal
 
 report.todo.columns=id,start.active,entry.age,depends.indicator,priority,project,tags,recur.indicator,wait,wait.remaining,scheduled,due,until,description
 report.todo.description=Future (hidden) tasks
-report.todo.filter=(status:pending or status:waiting) -backlog -goal
+report.todo.filter=(status:pending or status:waiting) -backlog -content -goal
 report.todo.labels=ID,A,Age,D,P,Project,Tags,R,Wait,Remaining,Sched,Due,Until,Description
 report.todo.sort=due+,wait+,entry+
+
+report.backlog.columns=id,start.active,entry.age,depends.indicator,priority,project,tags,recur.indicator,wait,wait.remaining,scheduled,due,until,description
+report.backlog.description=Backlog tasks
+report.backlog.filter=(status:pending or status:waiting) +backlog
+report.backlog.labels=ID,A,Age,D,P,Project,Tags,R,Wait,Remaining,Sched,Due,Until,Description
+report.backlog.sort=priority-,project
+
+report.content.columns=id,start.active,entry.age,depends.indicator,priority,project,tags,recur.indicator,wait,wait.remaining,scheduled,due,until,description
+report.content.description=Content items
+report.content.filter=(status:pending or status:waiting) +content
+report.content.labels=ID,A,Age,D,P,Project,Tags,R,Wait,Remaining,Sched,Due,Until,Description
+report.content.sort=priority-,project
+
+report.goals.columns=id,start.active,entry.age,depends.indicator,priority,project,tags,recur.indicator,wait,wait.remaining,scheduled,due,until,description
+report.goals.description=Future goals
+report.goals.filter=(status:pending or status:waiting) +goal
+report.goals.labels=ID,A,Age,D,P,Project,Tags,R,Wait,Remaining,Sched,Due,Until,Description
+report.goals.sort=priority-,due+,project
