@@ -6,7 +6,7 @@ no-global-config true
 agent-list true
 no-query-string true
 
-ignore-crawlers true
+ignore-crawlers false
 
 ignore-status 301
 ignore-status 302

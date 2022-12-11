@@ -10,19 +10,22 @@ function clean() {
 
 # stats_execution period_type period_name regexp
 function stats_execution () {
-    #find ${data} -type f -name "${3}" -exec cat {} + | goaccess --config-file /home/fale/.dotfiles/goaccessrc --output ${data}/goaccess/${1}/${2}.html
-    find ${data} -type f -name "${3}" -exec cat {} + | grep -v "/.well-known/matrix" | grep -v "/avatar-500px.png" | grep -v "index.xml" | grep -v "robots.txt" | goaccess --config-file /home/fale/.goaccessrc --output ${data}/goaccess/${1}/${2}.html
-    echo "Go to ${data}/goaccess/${1}/${2}.html to see the data!"
+    find ${data} -type f -name "${3}" -exec cat {} + | grep -v "/.well-known/matrix" | grep -v "/avatar-500px.png" | grep -v "index.xml" | grep -v "robots.txt" | goaccess --config-file /home/fale/.goaccessrc --ignore-crawlers --output ${data}/goaccess/0_pessimistic/${1}/${2}.html
+    find ${data} -type f -name "${3}" -exec cat {} + | goaccess --config-file /home/fale/.goaccessrc --ignore-crawlers --output ${data}/goaccess/1_fair/${1}/${2}.html
+    find ${data} -type f -name "${3}" -exec cat {} + | goaccess --config-file /home/fale/.goaccessrc --output ${data}/goaccess/2_optimistic/${1}/${2}.html
+    echo "Go to ${data}/goaccess/0_pessimistic/${1}/${2}.html to see the data!"
+    echo "Go to ${data}/goaccess/1_fair/${1}/${2}.html to see the data!"
+    echo "Go to ${data}/goaccess/2_optimistic/${1}/${2}.html to see the data!"
 }
 
 # daily_stats year month day
 function daily_stats () {
-    stats_execution "daily" "${1}-${2}-${3}" "${1}-${2}-${3}.log"
+    stats_execution "0_daily" "${1}-${2}-${3}" "${1}-${2}-${3}.log"
 }
 
 # monthly_stats year month
 function monthly_stats () {
-    stats_execution "monthly" "${1}-${2}" "${1}-${2}-*.log"
+    stats_execution "1_monthly" "${1}-${2}" "${1}-${2}-*.log"
 }
 
 # quarterly_stats year quarter
@@ -33,17 +36,17 @@ function quarterly_stats () {
         3) rgxp=${1}'-0[7-9]-*.log' ;;
         4) rgxp=${1}'-1[0-2]-*.log' ;;
     esac
-    stats_execution "quarterly" "${1}-Q${2}" "${rgxp}"
+    stats_execution "2_quarterly" "${1}-Q${2}" "${rgxp}"
 }
 
 # yearly_stats year
 function yearly_stats () {
-    stats_execution "yearly" "${1}" "${1}-*.log"
+    stats_execution "3_yearly" "${1}" "${1}-*.log"
 }
 
 # all_time_stats
 function all_time_stats () {
-    stats_execution "all_time" "all" "*.log"
+    stats_execution "4_all_time" "all" "*.log"
 }
 
 function all () {
@@ -108,7 +111,12 @@ function man () {
 }
 
 data=${HOME}/fale-io-logs
-mkdir -p ${data}/goaccess/monthly ${data}/goaccess/quarterly ${data}/goaccess/yearly
+for mode in 0_pessimistic 1_fair 2_optimistic; do
+    for period in 0_daily 1_monthly 2_quarterly 3_yearly 4_all_time; do
+        mkdir -p ${data}/goaccess/${mode}/${period}
+    done
+done
+
 
 case $# in
     1) case ${1} in
