@@ -6,11 +6,11 @@ taskd.certificate=\/var\/home\/fale\/.task-fale.cert.pem
 taskd.key=\/var\/home\/fale\/.task-fale.key.pem
 taskd.ca=\/var\/home\/fale\/.task-ca.cert.pem
 
-report.next.filter=status:pending limit:page -backlog -content -goal
+report.next.filter=status:pending limit:page -backlog -content -goal -wish
 
 report.todo.columns=id,start.active,entry.age,depends.indicator,priority,project,tags,recur.indicator,wait,wait.remaining,scheduled,due,until,description
 report.todo.description=Future (hidden) tasks
-report.todo.filter=(status:pending or status:waiting) -backlog -content -goal
+report.todo.filter=(status:pending or status:waiting) -backlog -content -goal -wish
 report.todo.labels=ID,A,Age,D,P,Project,Tags,R,Wait,Remaining,Sched,Due,Until,Description
 report.todo.sort=due+,wait+,entry+
 
@@ -31,3 +31,10 @@ report.goals.description=Future goals
 report.goals.filter=(status:pending or status:waiting) +goal
 report.goals.labels=ID,A,Age,D,P,Project,Tags,R,Wait,Remaining,Sched,Due,Until,Description
 report.goals.sort=priority-,due+,project
+
+report.wishlist.columns=id,start.active,entry.age,depends.indicator,priority,project,tags,recur.indicator,wait,wait.remaining,scheduled,due,until,description
+report.wishlist.description=Wishlist
+report.wishlist.filter=(status:pending or status:waiting) +wish
+report.wishlist.labels=ID,A,Age,D,P,Project,Tags,R,Wait,Remaining,Sched,Due,Until,Description
+report.wishlist.sort=priority-,due+,project
+news.version=2.6.0
