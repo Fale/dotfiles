@@ -30,7 +30,7 @@ report.goals.columns=id,start.active,entry.age,depends.indicator,priority,projec
 report.goals.description=Future goals
 report.goals.filter=(status:pending or status:waiting) +goal
 report.goals.labels=ID,A,Age,D,P,Project,Tags,R,Wait,Remaining,Sched,Due,Until,Description
-report.goals.sort=priority-,due+,project
+report.goals.sort=due+,project-,priority-
 
 report.wishlist.columns=id,start.active,entry.age,depends.indicator,priority,project,tags,recur.indicator,wait,wait.remaining,scheduled,due,until,description
 report.wishlist.description=Wishlist
