@@ -1,3 +1,3 @@
 #!/bin/bash
-gopass show --password www/fedoraproject.org | tr -d '\n'
+gopass show -o www/fedoraproject.org | tr -d '\n'
 gopass otp -o www/fedoraproject.org
