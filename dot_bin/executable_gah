@@ -1,11 +1,11 @@
 #!/bin/bash
 
 function sync() {
-    s3cmd sync s3://fale-io-logs/archived/ /home/fale/fale-io-logs/
+    aws s3 sync s3://fale-io-logs/archived/ /home/fale/fale-io-logs/
 }
 
 function clean() {
-    s3cmd rm s3://fale-io-logs/compacted/*
+    aws s3 rm s3://fale-io-logs/compacted/*
 }
 
 # stats_execution period_type period_name regexp
@@ -14,10 +14,12 @@ function stats_execution () {
     find ${data} -type f -name "${3}" -exec cat {} + | grep -v "/.well-known/matrix" | grep -v "/avatar-500px.png" | grep -v "index.xml" | grep -v "robots.txt" | goaccess --config-file /home/fale/.goaccessrc --output ${data}/goaccess/1_strict/${1}/${2}.html
     find ${data} -type f -name "${3}" -exec cat {} + | goaccess --config-file /home/fale/.goaccessrc --ignore-crawlers --output ${data}/goaccess/2_fair/${1}/${2}.html
     find ${data} -type f -name "${3}" -exec cat {} + | goaccess --config-file /home/fale/.goaccessrc --output ${data}/goaccess/3_real/${1}/${2}.html
+    find ${data} -type f -name "${3}" -exec cat {} + | grep "index.xml" | goaccess --config-file /home/fale/.goaccessrc --output ${data}/goaccess/4_feed/${1}/${2}.html
     echo "Go to ${data}/goaccess/0_pessimistic/${1}/${2}.html to see the data!"
     echo "Go to ${data}/goaccess/1_strict/${1}/${2}.html to see the data!"
     echo "Go to ${data}/goaccess/2_fair/${1}/${2}.html to see the data!"
     echo "Go to ${data}/goaccess/3_real/${1}/${2}.html to see the data!"
+    echo "Go to ${data}/goaccess/4_feed/${1}/${2}.html to see the data!"
 }
 
 # daily_stats year month day
@@ -113,7 +115,7 @@ function man () {
 }
 
 data=${HOME}/fale-io-logs
-for mode in 0_pessimistic 1_strict 2_fair 3_real; do
+for mode in 0_pessimistic 1_strict 2_fair 3_real 4_feed; do
     for period in 0_daily 1_monthly 2_quarterly 3_yearly 4_all_time; do
         mkdir -p ${data}/goaccess/${mode}/${period}
     done
