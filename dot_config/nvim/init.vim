@@ -32,6 +32,10 @@ autocmd BufReadPost *
   \   exe "normal! g`\"" |
   \ endif
 
+" Disable parenthesis matching
+let g:loaded_matchparen=1
+
+
 " Golang
 let g:go_fmt_command="gopls"
 let g:go_gopls_gofumpt=1
